@@ -700,7 +700,38 @@ router.post('/api/identify', function(req, res) {
 	  ior:ior,
 	  ioml:ioml,
 	  iorm:iorm
-	}
+  }
+  res.send({
+    percent: iorm,
+    overall: {
+      score: ior,
+      maturity_level: ioml
+    },
+    subcategories: [{
+      score: isc1sr,
+      maturity_level: isc1risk
+    },
+    {
+      score: isc2sr,
+      maturity_level: isc2risk
+    },
+    {
+      score: isc3sr,
+      maturity_level: isc3risk
+    },
+    {
+      score: isc4sr,
+      maturity_level: isc4risk
+    },
+    {
+      score: isc5sr,
+      maturity_level: isc5risk
+    },
+    {
+      score: isc6sr,
+      maturity_level: isc6risk
+    }]
+  })
 	IdentifyScore.addIdentifyScore(identifyscore, function(err, identifyscore) {
 		  if (identifyscore) {
 			 response = {
@@ -1130,6 +1161,37 @@ router.post('/api/protect', function(req, res) {
     poml: poml,
     porm: porm
   }
+  res.send({
+    percent: porm,
+    overall: {
+      score: por,
+      maturity_level: poml
+    },
+    subcategories: [{
+      score: psc1sr,
+      maturity_level: psc1risk
+    },
+    {
+      score: psc2sr,
+      maturity_level: psc2risk
+    },
+    {
+      score: psc3sr,
+      maturity_level: psc3risk
+    },
+    {
+      score: psc4sr,
+      maturity_level: psc4risk
+    },
+    {
+      score: psc5sr,
+      maturity_level: psc5risk
+    },
+    {
+      score: psc6sr,
+      maturity_level: psc6risk
+    }]
+  })
   console.log(protectscore);
   ProtectScore.addProtectScore(protectscore, function(err, protectscore) {
         if (protectscore) {
@@ -1407,6 +1469,25 @@ router.post('/api/detect', function(req, res) {
     doml: doml,
     dorm: dorm
   }
+  res.send({
+    percent: dorm,
+    overall: {
+      score: dor,
+      maturity_level: doml
+    },
+    subcategories: [{
+      score: dsc1sr,
+      maturity_level: dsc1risk
+    },
+    {
+      score: dsc2sr,
+      maturity_level: dsc2risk
+    },
+    {
+      score: dsc3sr,
+      maturity_level: dsc3risk
+    }]
+  })
   console.log(detectscore);
   DetectScore.addDetectScore(detectscore, function(err, detectscore) {
         if (detectscore) {
@@ -1681,6 +1762,33 @@ router.post('/api/response', function(req, res) {
     roml: roml,
     rorm: rorm
   }
+  res.send({
+    percent: rorm,
+    overall: {
+      score: ror,
+      maturity_level: roml
+    },
+    subcategories: [{
+      score: rsc1sr,
+      maturity_level: rsc1risk
+    },
+    {
+      score: rsc2sr,
+      maturity_level: rsc2risk
+    },
+    {
+      score: rsc3sr,
+      maturity_level: rsc3risk
+    },
+    {
+      score: rsc4sr,
+      maturity_level: rsc4risk
+    },
+    {
+      score: rsc5sr,
+      maturity_level: rsc5risk
+    }]
+  })
   console.log(respondscore);
   RespondScore.addRespondScore(respondscore, function(err, respondscore) {
         if (respondscore) {
@@ -1868,6 +1976,25 @@ router.post('/api/recovery', function(req, res) {
     reoml: reoml,
     reorm: reorm
   }
+  res.send({
+    percent: reorm,
+    overall: {
+      score: reor,
+      maturity_level: reoml
+    },
+    subcategories: [{
+      score: resc1sr,
+      maturity_level: resc1risk
+    },
+    {
+      score: resc2sr,
+      maturity_level: resc2risk
+    },
+    {
+      score: resc3sr,
+      maturity_level: resc3risk
+    }]
+  })
   RecoverScore.addRecoverScore(recoverscore, function(err, recoverscore) {
         if (recoverscore) {
            response = {

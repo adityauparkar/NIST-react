@@ -6,13 +6,14 @@ import Dashboard from '../src/components/Dashboard'
 import Clients from '../src/components/Clients'
 import Management from '../src/components/Management'
 import AssessmentState from '../src/components/AssessmentState'
+import Result from '../src/components/Result'
 import axios from 'axios'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      dashboardState: 'csri',
+      dashboardState: 'result',
       assessmentState: 'identify',
     }
   }
@@ -80,6 +81,7 @@ export default class App extends React.Component {
           <Assessment
             assessmentState={this.state.assessmentState}
             changeAssessmentState={this.changeAssessmentState}
+            changeDashboardState={this.changeDashboardState}
             showNext={this.state.assessmentState!="recovery"}
             showBack={this.state.assessmentState!="identify"}
             onNext={()=>{this.handleNextBackClick(true)}}
@@ -93,6 +95,8 @@ export default class App extends React.Component {
         ]
 
         break
+
+      case 'result': dashboard_state = <Result />; break  
 
       case 'clients':
         dashboard_state = <Clients />
