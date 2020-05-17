@@ -5,7 +5,9 @@ import Styles from './styles'
 class Result extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      category: 0,
+    }
   }
   render() {
     let phase_name = [
@@ -15,102 +17,166 @@ class Result extends React.Component {
       { text: 'Response', color: '#307bbb' },
       { text: 'Recovery', color: '#307bbb' },
     ]
+    let subcategories = [
+      [
+        'Asset Management',
+        'Business Environment',
+        'Governance',
+        'Risk assesment',
+        'Risk Management',
+        'Supply Chain Management',
+      ],
+      [
+        'Identity Management and Access Control',
+        'Awareness and Training',
+        'Data Security',
+        'Information Protection Processes and Procedures',
+        'Maintenance',
+        'Protective Technology',
+      ],
+      [
+        'Anomalies and Events',
+        'Security Control Monitoring',
+        'Detection Processes',
+      ],
+      [
+        'Response Planning',
+        'Communications',
+        'Analysis',
+        'Mitigation',
+        'Improvements',
+      ],
+      ['Recovery Planning', 'Improvements', 'Communications'],
+    ]
     let result = Object.values(this.props.result)
     return (
       <Styles>
         <div className="result-container">
           <div className="title">CSRI Dashboard</div>
           <div className="body">
-            <div className="percent-container">
-              <div className="percent-title">
-                Maturity results of your assessment
-              </div>
-              <div className="percent-body">
-                {result.map &&
-                  result.map((ele, index) => {
-                    return (
-                      <div key={index} className="percent-box">
-                        <div className="phase-name">
-                          {phase_name[index].text}
+            <div className="parent-card">
+              <div className="percent-container">
+                <div className="percent-title">
+                  Maturity results of your assessment
+                </div>
+                <div className="percent-body">
+                  {result.map &&
+                    result.map((ele, index) => {
+                      return (
+                        <div key={index} className="percent-box">
+                          <div className="phase-name">
+                            {phase_name[index].text}
+                          </div>
+                          <div
+                            className="percent-circle"
+                            style={{ borderColor: phase_name[index].color }}
+                          >
+                            {ele.percent}
+                          </div>
                         </div>
-                        <div
-                          className="percent-circle"
-                          style={{ borderColor: phase_name[index].color }}
-                        >
-                          {ele.percent}
+                      )
+                    })}
+                </div>
+              </div>
+              <div className="thank-you-box">
+                <div className="thank-you-title">Thank You!</div>
+                <div className="thank-you-subtitle">
+                  Based on your result, we have our{' '}
+                  <span
+                    style={{
+                      color: '#3f6ad8',
+                      fontWeight: 'bolder',
+                      fontSize: '.88rem',
+                    }}
+                  >
+                    Recommentdations
+                  </span>{' '}
+                  to improve your maturity level.
+                </div>
+              </div>
+              <div className="overall-result">
+                <div className="overall-result-title">
+                  Overall Maturity Results
+                </div>
+                <div className="overall-result-table">
+                  <div className="row header-row">
+                    <div className="column phase">Phase</div>
+                    <div className="column score">Score</div>
+                    <div className="column maturity_level">Maturity Level</div>
+                  </div>
+                  {result.map &&
+                    result.map((ele, index) => {
+                      return (
+                        <div className="row" key={index}>
+                          <div className="column phase">
+                            {phase_name[index].text.toUpperCase()}
+                          </div>
+                          <div className="column score">
+                            {ele.overall.score}
+                          </div>
+                          <div className="column maturity_level">
+                            {ele.overall.maturity_level}
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
+                </div>
               </div>
-            </div>
-            <div className="thank-you-box">
-              <div className="thank-you-title">Thank You!</div>
-              <div className="thank-you-subtitle">
-                Based on your result, we have our <span>Recommentdations</span>{' '}
-                to improve your maturity level.
-              </div>
-            </div>
-            <div className="overall-result">
-              <div className="overall-result-title">
-                Overall Maturity Results
-              </div>
-              <div className="overall-result-table">
-                <div className="row">
-                  <div className="column">Phase</div>
-                  <div className="column">Score</div>
-                  <div className="column">Maturity Level</div>
+              <div className="detailed-result">
+                <div className="detailed-result-title">
+                  Detailed Results of each phase
                 </div>
                 {result.map &&
                   result.map((ele, index) => {
                     return (
-                      <div className="row" key={index}>
-                        <div className="column">
-                          {phase_name[index].text.toUpperCase()}
+                      <div className="category-card">
+                        <div
+                          className="category-name"
+                          key={index}
+                          onClick={() => {
+                            this.setState({ category: index })
+                          }}
+                        >
+                          {phase_name[index].text}
                         </div>
-                        <div className="column">{ele.overall.score}</div>
-                        <div className="column">
-                          {ele.overall.maturity_level}
-                        </div>
+                        {this.state.category == index && (
+                          <div
+                            className={`category-table ${
+                              this.state.category == index
+                                ? 'visible'
+                                : 'invisible'
+                            }`}
+                          >
+                            <div className="row header-row">
+                              <div className="column category">Category</div>
+                              <div className="column score">Score</div>
+                              <div className="column maturity_level">
+                                Maturity Level
+                              </div>
+                            </div>
+                            {ele.subcategories &&
+                              ele.subcategories.map &&
+                              ele.subcategories.map((sub, subi) => {
+                                return (
+                                  <div className="row" index={subi}>
+                                    <div className="column category">
+                                      {subcategories[index][subi]}
+                                    </div>
+                                    <div className="column score">
+                                      {sub.score}
+                                    </div>
+                                    <div className="column maturity_level">
+                                      {sub.maturity_level}
+                                    </div>
+                                  </div>
+                                )
+                              })}
+                          </div>
+                        )}
                       </div>
                     )
                   })}
               </div>
-            </div>
-            <div className="detailed-result">
-              <div className="detailed-result-title">
-                Detailed Results of each phase
-              </div>
-              {result.map &&
-                result.map((ele, index) => {
-                  return (
-                    <div className="category">
-                      <div className="category-name" key={index}>
-                        {phase_name[index].text}
-                      </div>
-                      <div className="category-table">
-                        <div className="row">
-                          <div className="column">Category</div>
-                          <div className="column">Score</div>
-                          <div className="column">Maturity Level</div>
-                        </div>
-                        {ele.subcategories &&
-                          ele.subcategories.map &&
-                          ele.subcategories.map((sub, subi) => {
-                            return (
-                              <div className="row" index={subi}>
-                                <div className="column">{sub.name}</div>
-                                <div className="column">{sub.score}</div>
-                                <div className="column">
-                                  {sub.maturity_level}
-                                </div>
-                              </div>
-                            )
-                          })}
-                      </div>
-                    </div>
-                  )
-                })}
             </div>
           </div>
         </div>
