@@ -95,6 +95,17 @@ const ResultStyles = styled.div`
         background-color: #d0eeff;
         color: #0b5885;
 
+        .recommendation-text {
+          color: #3f6ad8;
+          font-weight: bolder;
+          font-size: 0.88rem;
+          cursor: pointer;
+
+          &:hover{
+              text-decoration: underline;
+          }
+        }
+
         .thank-you-title {
           font-weight: bolder;
           font-size: 0.88rem;
@@ -183,14 +194,14 @@ const ResultStyles = styled.div`
             font-weight: 400;
             border-bottom: 1px solid rgba(26, 54, 126, 0.125);
           }
-          .invisible{
-              height: 0 !important;
+          .invisible {
+            height: 0 !important;
           }
           .category-table {
             padding: 1.25rem;
             margin-bottom: 1rem;
             height: max-content;
-            transition: height .2s;
+            transition: height 0.2s;
 
             .header-row {
               border-bottom: 1px solid #e9ecef !important;

@@ -83,10 +83,9 @@ class Result extends React.Component {
                 <div className="thank-you-subtitle">
                   Based on your result, we have our{' '}
                   <span
-                    style={{
-                      color: '#3f6ad8',
-                      fontWeight: 'bolder',
-                      fontSize: '.88rem',
+                    className="recommendation-text"
+                    onClick={() => {
+                      this.props.changeDashboardState('recommendation')
                     }}
                   >
                     Recommentdations
@@ -129,10 +128,10 @@ class Result extends React.Component {
                 {result.map &&
                   result.map((ele, index) => {
                     return (
-                      <div className="category-card">
+                      <div className="category-card" key={index}>
                         <div
                           className="category-name"
-                          key={index}
+                          
                           onClick={() => {
                             this.setState({ category: index })
                           }}
@@ -158,7 +157,7 @@ class Result extends React.Component {
                               ele.subcategories.map &&
                               ele.subcategories.map((sub, subi) => {
                                 return (
-                                  <div className="row" index={subi}>
+                                  <div className="row" key={subi}>
                                     <div className="column category">
                                       {subcategories[index][subi]}
                                     </div>
