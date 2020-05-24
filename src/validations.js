@@ -123,9 +123,9 @@ export class Validations {
                 if (fieldValue.indexOf(" ") !== -1) {
                     this.errors[fieldName] =
                         "Spaces are not allowed in the password";
-                } else if (fieldValue.length < 6) {
+                } else if (fieldValue.length < 8) {
                     this.errors[fieldName] =
-                        "Minimum 6 characters password is allowed";
+                        "Minimum 8 characters password is allowed";
                 } else {
                     this.errors[fieldName] = null;
                 }
