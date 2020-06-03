@@ -88,7 +88,7 @@ class Result extends React.Component {
                       this.props.changeDashboardState('recommendation')
                     }}
                   >
-                    Recommentdations
+                    Recommendations
                   </span>{' '}
                   to improve your maturity level.
                 </div>
